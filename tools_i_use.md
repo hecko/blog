@@ -1,6 +1,6 @@
 # Tools I use for work
 
-  * MacBook Pro 13
+  * MacBook Pro 13 (early 2015)
   * iTerm2
   * Sourcetree as UI for Git
   * BitBucket for private Git
