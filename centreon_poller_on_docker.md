@@ -24,3 +24,11 @@
   * for deployment Jenkins pulls the git repository and runs ansible deployment scripts for one or more docker host systems
   * Dockerfiles combine centreon installation from RPM repos with local plugins and configuration and builds centreon-engine docker image
   * docker hosts (pollers) only run docker daemon, snmp (for monitoring) and ssh
+  
+## Details - building of centreon-engine images
+
+Operator connects to Jenkins, runs build script. Build script pulls the local git repository with all configuration files and plugins for centreon poller. Runs docker_build.sh script from git repository which pulls centos:7 and installs centreon-poller packages from official centreon RPM repositories. Also adds local plugins. After the build the new docker image is pushed to local docker repository.
+
+## Details - deployment of centreon-engine image on host
+
+Operator connects to Jenkins UI, selects "deploy centreon poller" and fills out the hostname of the host system where to deploy centreon poller. Jenkins pulls the git repository and plays and Ansible playlist to deploy docker, rpms, snmp and other bits on the docker host. Then plays another playlist to deploy centreon-engine on the docker host. When the centreon-engine docker image starts it automatically connects to the central server with own little python client and downloads the poller configuration from the central server using ssh. Then starts an actual docker-engine. The docker-engine configuration and persistence files are mounted from the main host filesystem - they are persistent during docker engine restarts - otherwise we would be waiting waaay too long beteen each image restart in centreon PENDING state for services - also we would be sending way too many non-relevant emails. Make the retention files persistent!
