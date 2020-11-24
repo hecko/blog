@@ -7,7 +7,7 @@
   * all pollers (about 60 now) run in Docker containers
   * two main docker containers:
     * centreon-engine
-    * centreon-vmware - with centreon vmware daemon
+    * centreon-vmware - with centreon vmware daemon (Dockerfile build on top of https://hub.docker.com/r/moirelabs/centreon_vmware)
   * centreon-engine container runs several services using supervisord:
     * centreon-engine
     * ssh for updating centreon config
