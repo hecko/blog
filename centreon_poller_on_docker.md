@@ -32,3 +32,9 @@ Operator connects to Jenkins and runs jenkins operation. Operation pulls the loc
 ## Details - deployment of centreon-engine image on host
 
 Operator connects to Jenkins UI, selects "deploy centreon poller" and fills out the hostname of the host system where to deploy centreon poller. Jenkins pulls the git repository and plays and Ansible playlist to deploy docker, rpms, snmp and other bits on the docker host. Then plays another playlist to deploy centreon-engine on the docker host. When the centreon-engine docker image starts it automatically connects to the central server with own little python client and downloads the poller configuration from the central server using ssh. Then starts an actual docker-engine. The docker-engine configuration and persistence files are mounted from the main host filesystem - they are persistent during docker engine restarts - otherwise we would be waiting waaay too long beteen each image restart in centreon PENDING state for services - also we would be sending way too many non-relevant emails. Make the retention files persistent!
+
+## Details - monitoring of docker hosts and docker containers
+
+Docker daemons on all hosts are queried by script on central management server using the docker API. The docker API gives information about the local version of the installed and running centreon engine container - this is evaluated and if the image is too old than the newest available image in local docker repository then its re-deployed automatically calling the deployment procedure in Jenkins.
+
+Docker centreon engine images are also re-build automatically once there is a new version of centreon engine (eg. bump from 19.04.1 to 19.04.5)
