@@ -2,7 +2,8 @@
 
   * Uses Centreon 19.04
   * manually written Dockerfile for centreon poller
-  * one central centreon central server with web interface - not running on docker yet
+  * one central centreon server with web interface - not running on docker yet
+  * one MySQL instance for centreon database on separate system
   * all pollers (about 60 now) run in Docker containers
   * two main docker containers:
     * centreon-engine
