@@ -12,6 +12,8 @@
     * centreon-engine
     * ssh for updating centreon config
     * postfix3 for sending emails
+  * centreon-vmware starts, then pulls a small git repository with vmware configuration files and depending on the hostname deploys the configuration
+    * it is required to reinitialize the vmware docker container if we want to update the configuration, but this is a very cheap operation so OK
   * centreon containers are running on top od CentOS 7 and are also based on centos7 Docker layer
   * additional docker network created between the two containers (centreon-engine and centreon-vmware)
   * containers and all host Centos 7 services are managed from one central server using Ansible
