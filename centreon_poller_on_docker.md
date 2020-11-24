@@ -27,7 +27,7 @@
   
 ## Details - building of centreon-engine images
 
-Operator connects to Jenkins, runs build script. Build script pulls the local git repository with all configuration files and plugins for centreon poller. Runs docker_build.sh script from git repository which pulls centos:7 and installs centreon-poller packages from official centreon RPM repositories. Also adds local plugins. After the build the new docker image is pushed to local docker repository.
+Operator connects to Jenkins and runs jenkins operation. Operation pulls the local git repository with all configuration files and plugins for centreon poller. Runs docker_build.sh script from git repository which pulls centos:7 and installs centreon-engine-poller packages from official centreon RPM repositories. Also adds local plugins and configuration. After the build the new docker image is pushed to local docker repository.
 
 ## Details - deployment of centreon-engine image on host
 
